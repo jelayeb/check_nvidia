@@ -8,7 +8,7 @@ Now the Check Script
 This plugin doesn’t provide any kind of alerting at this time, only to record performance data. 
 We check GPU Usage, GPU Memory Usage, and Temperature.
 
-Download the check_nvidia.ps1 to c:\programfiles\nsclient++\scripts\
+Download the check_nvidia.ps1 https://github.com/jelayeb/check_nvidia/blob/master/check_nvidia.ps1 to c:\programfiles\nsclient++\scripts\
 
 NSClient Config
 The script should be placed under nsclient++\scripts\ 
