@@ -1,0 +1,34 @@
+To monitor Nvidia Graphic Card Performance on Windows you need to install nvidia wmi providers on the target machine. 
+Download and Install Nvidia-WMI-Driver    http://www.nvidia.com/object/nvwmi-driver.html
+
+Use Any WMIExplorer to See if you have already the new Nvidia Name Space 
+ROOT\cimv2\NV
+
+Now the Check Script 
+This plugin doesn’t provide any kind of alerting at this time, only to record performance data. 
+We check GPU Usage, GPU Memory Usage, and Temperature.
+
+Download the check_nvidia.ps1 to c:\programfiles\nsclient++\scripts\
+
+NSClient Config
+The script should be placed under nsclient++\scripts\ 
+Name it check_nvidia.ps1 or as you like 
+
+Add command in nsclient.ini under this section 
+
+[/settings/external scripts/scripts]
+check_nvidia = cmd /c echo scripts\\check_nvidia.ps1; exit($lastexitcode) | powershell.exe -NoProfile -command -
+
+
+
+Icinga2 Service Configuration
+
+apply Service "nvidia" {
+        import                          "generic-service"
+        display_name                      = "Nvidia"
+        check_command                 = "nrpe"
+        vars.nrpe_command          = "check_nvidia"
+        enable_perfdata                 = true
+        
+        assign where host.name == "wha7985"
+}
