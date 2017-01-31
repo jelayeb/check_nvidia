@@ -9,6 +9,7 @@
 #	[/settings/external scripts/scripts]
 #	check_nvidia = cmd /c echo scripts\\check_nvidia.ps1; exit($lastexitcode) | powershell.exe -NoProfile -command -
 #
+# 31012017 change from wirte-output to write-host to solve line cut on some powershell versions. 
 
 $computer = $env:COMPUTERNAME
 $namespace = "ROOT\cimv2\NV"
@@ -24,6 +25,6 @@ $temperature=$TEMP_Meters.temperature
 
 $output = "Nvidia $nvidia_model Memory:$mem_usage% GPU:$gpu_usage% Temp:$Temperature°C | Memory=$mem_usage;;;0; GPU=$gpu_usage;;;0; TEMP=$temperature;;;0;"
 
-Write-Output $Output
+Write-Host $Output
 
 exit 0
